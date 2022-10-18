@@ -1,35 +1,13 @@
+const dotenv = require("dotenv");
 const express = require("express");
-const bcrypt = require("bcrypt");
-const { User } = require("../db/models/User");
+
+dotenv.config();
 
 const router = express.Router();
 
-router.post("/login", async (req, res) => {
-  const result = await User.findOne({
-    where: {
-      email: req.body.email,
-    },
-  });
 
-  const response = {
-    access: false,
-    error: null,
-    user: null,
-  };
-
-  if (result) {
-    const isValid = await bcrypt.compare(
-      req.body.password,
-      result.get("password")
-    );
-    response.access = isValid;
-    response.error = isValid ? null : "Password Incorrecto";
-    response.user = isValid ? result : null;
-    res.send(response);
-  } else {
-    response.error = "Usuario no Existe";
-    res.send(response);
-  }
+router.post("/home", (req, res) => {
+  res.send("poosi");
 });
 
 module.exports.router = router;

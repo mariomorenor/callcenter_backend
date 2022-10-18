@@ -1,9 +1,12 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const { router } = require("./routes");
-const { departments } = require("./routes/departments");
-const { stations } = require("./routes/stations");
+
+const loginController = require("./controllers/LoginController");
+const HomeController = require("./controllers/HomeController");
+
+const verifyToken = require("./middlewares/authentication");
+
 require("./PeerServer");
 
 dotenv.config();
@@ -19,9 +22,8 @@ app.get("/", (req, res) => {
   res.send("Server Online");
 });
 
-app.use("/api", router);
-app.use("/api", departments);
-app.use("/api", stations);
+app.use("/auth", loginController);
+app.use("/", verifyToken, HomeController);
 
 app.listen(port, () => {
   console.log(`Server Listening on port ${port}`);
