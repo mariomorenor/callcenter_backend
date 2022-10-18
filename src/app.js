@@ -8,7 +8,7 @@ require("./PeerServer");
 
 dotenv.config();
 
-const port = process.env.SERVER_PORT || 6969;
+const port = process.env.SERVER_PORT || 9090;
 
 const app = express();
 app.use(cors());
