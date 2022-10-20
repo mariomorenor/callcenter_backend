@@ -5,8 +5,12 @@ const Department = sequelize.define("department", {
   peer_id: {
     type: DataTypes.STRING,
     unique: true,
+    allowNull: false,
   },
-  name: DataTypes.STRING,
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
 });
 
 Department.sync();

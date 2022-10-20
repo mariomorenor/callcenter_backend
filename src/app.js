@@ -1,29 +1,33 @@
+// Global Imports
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 
-const loginController = require("./controllers/LoginController");
-const HomeController = require("./controllers/HomeController");
-
-const verifyToken = require("./middlewares/authentication");
-
+// Peer Server
 require("./PeerServer");
 
+// .env Vars
 dotenv.config();
 
+// Server port
 const port = process.env.SERVER_PORT || 9090;
 
+// Initialize configurations
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-  res.send("Server Online");
-});
+// Middlewares
+const middlewareToken = require("./middlewares/authentication");
 
-app.use("/auth", loginController);
-app.use("/", verifyToken, HomeController);
+// Routes Imports
+const indexRoutes = require("./routes");
+const departmentRoutes = require("./routes/departments");
+
+// Routes Definitions
+app.use(indexRoutes);
+app.use(middlewareToken, departmentRoutes);
 
 app.listen(port, () => {
   console.log(`Server Listening on port ${port}`);

@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const verifyToken = (req, res, next) => {
-  const token = req.header("auth-token");
+  const token = req.header("token");
 
   if (!token) return res.status(401).json({ error: "Acceso Denegado" });
 
@@ -12,7 +12,7 @@ const verifyToken = (req, res, next) => {
     req.user = verified;
     next();
   } catch (error) {
-    res.status(400).json({ error: "token no es válido" });
+    res.status(403).json({ error: "token no es válido" });
   }
 };
 
