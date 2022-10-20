@@ -23,11 +23,13 @@ const middlewareToken = require("./middlewares/authentication");
 
 // Routes Imports
 const indexRoutes = require("./routes");
-const departmentRoutes = require("./routes/departments");
+const departmentsRoutes = require("./routes/departments");
+const stationsRoutes = require("./routes/stations");
 
 // Routes Definitions
 app.use(indexRoutes);
-app.use(middlewareToken, departmentRoutes);
+app.use(middlewareToken, departmentsRoutes);
+app.use(middlewareToken, stationsRoutes);
 
 app.listen(port, () => {
   console.log(`Server Listening on port ${port}`);

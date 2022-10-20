@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkcallcenter_frontend"]=self["webpackChunkcallcenter_frontend"]||[]).push([[795],{1795:function(t,n,e){e.r(n),e.d(n,{default:function(){return u}});var s=function(){var t=this,n=t._self._c;return n("div",{staticClass:"container mt-5 stations"},[n("h1",{staticClass:"title"},[t._v("Estaciones")]),n("router-view")],1)},l=[],a={name:"StationsView"},r=a,c=e(1001),i=(0,c.Z)(r,s,l,!1,null,null,null),u=i.exports}}]);
+//# sourceMappingURL=795.3604a0f7.js.map
