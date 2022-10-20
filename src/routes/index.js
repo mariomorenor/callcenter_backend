@@ -1,9 +1,11 @@
 const router = require("express").Router();
 const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
+const middlewareToken = require("../middlewares/authentication");
 dotenv.config();
 
 const secret = process.env.JWT_TOKEN;
+const stationsPassword = process.env.JWT_PASSWORD_STATIONS;
 
 const loginController = require("../controllers/LoginController");
 
@@ -31,6 +33,23 @@ router.post("/login", (req, res) => {
           break;
       }
     });
+});
+
+router.get("/test-connection", middlewareToken, (req, res) => {
+  res.json({
+    message: "Conexión Exitosa!, Hurray...!!!",
+  });
+});
+
+router.post("/get-token-for-stations", (req, res) => {
+  if (req.body.password == stationsPassword) {
+    const token = jwt.sign({}, secret);
+    res.header("token",token).json({ token: token });
+  }else{
+    res.status(401).json({
+      message:"Cliente no Autorizado!"
+    })
+  }
 });
 
 module.exports = router;
