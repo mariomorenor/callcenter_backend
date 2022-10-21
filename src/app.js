@@ -32,5 +32,5 @@ app.use(middlewareToken, departmentsRoutes);
 app.use(middlewareToken, stationsRoutes);
 
 app.listen(port, () => {
-  console.log(`Server Listening on port ${port}`);
+  console.log(`Server Listening on  http://localhost:${port}`);
 });
