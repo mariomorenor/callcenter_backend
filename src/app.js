@@ -1,4 +1,5 @@
 // Global Imports
+const { createServer } = require("http");
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
@@ -14,6 +15,11 @@ const port = process.env.SERVER_PORT || 9090;
 
 // Initialize configurations
 const app = express();
+const server = createServer(app);
+
+// Socket Server
+require("./socketServer")(server);
+
 app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
@@ -31,6 +37,6 @@ app.use(indexRoutes);
 app.use(middlewareToken, departmentsRoutes);
 app.use(middlewareToken, stationsRoutes);
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server Listening on  http://localhost:${port}`);
 });
