@@ -8,6 +8,8 @@ const secret = process.env.JWT_TOKEN;
 const stationsPassword = process.env.JWT_PASSWORD_STATIONS;
 
 const loginController = require("../controllers/LoginController");
+const departmentController = require("../controllers/DepartmentsController");
+
 
 router.post("/login", (req, res) => {
   loginController
@@ -50,6 +52,12 @@ router.post("/get-token-for-stations", (req, res) => {
       message:"Cliente no Autorizado!"
     })
   }
+});
+
+router.get("/api/departments", (req, res) => {
+  departmentController.index().then((result) => {
+    res.json(result);
+  });
 });
 
 module.exports = router;

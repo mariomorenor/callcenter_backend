@@ -9,4 +9,8 @@ const peerServer = PeerServer({
   port,
 });
 
+peerServer.on("connection",(peer)=>{
+  console.log(peer.getId());
+})
+
 console.log(`Peer Server Listening on port: ${port}`);
